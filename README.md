@@ -12,6 +12,9 @@ You can use `kubectl get service` to monitor the external IP address of wordpres
 
 # To run
 
+- You will need account.json which should be a service account in gcloud
+- You will also need to change the `variables.tf` with real project ID that has compute API enabled!
+
 `terraform apply`
 
 # To remove
