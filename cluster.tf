@@ -1,4 +1,17 @@
+resource "google_compute_disk" "wordpress-disk" {
+  name = "wordpress-disk"
+  zone = "${var.gcloud-zone}"
+  size = 200
+}
+
+resource "google_compute_disk" "mysql-disk" {
+  name = "mysql-disk"
+  zone = "${var.gcloud-zone}"
+  size = 200
+}
+
 resource "google_container_cluster" "cluster" {
+  depends_on         = ["google_compute_disk.wordpress-disk", "google_compute_disk.mysql-disk"]
   name               = "${var.cluster-name}"
   zone               = "${var.gcloud-zone}"
   initial_node_count = "${var.cluster-size}"
@@ -25,14 +38,6 @@ resource "google_container_cluster" "cluster" {
 
   provisioner "local-exec" {
     command = "kubectl cluster-info"
-  }
-
-  provisioner "local-exec" {
-    command = "gcloud compute disks create --zone ${var.gcloud-zone} --size 200GB mysql-disk"
-  }
-
-  provisioner "local-exec" {
-    command = "gcloud compute disks create --zone ${var.gcloud-zone} --size 200GB wordpress-disk"
   }
 
   provisioner "local-exec" {

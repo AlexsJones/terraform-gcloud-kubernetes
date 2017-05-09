@@ -17,7 +17,3 @@ You can use `kubectl get service` to monitor the external IP address of wordpres
 # To remove
 
 `terraform destroy`
-
-- Remove gcloud compute disks
-`gcloud compute disks delete mysql-disk --zone europe-west1-b`
-`gcloud compute disks delete wordpress-disk --zone europe-west1-b`
