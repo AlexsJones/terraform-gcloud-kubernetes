@@ -45,18 +45,6 @@ resource "google_container_cluster" "cluster" {
   }
 
   provisioner "local-exec" {
-    command = "kubectl create -f mysql-deployment.yaml"
-  }
-
-  provisioner "local-exec" {
-    command = "kubectl create -f mysql-service.yaml"
-  }
-
-  provisioner "local-exec" {
-    command = "kubectl create -f wordpress-deployment.yaml"
-  }
-
-  provisioner "local-exec" {
-    command = "kubectl create -f wordpress-service.yaml"
+    command = "kubectl create -f ."
   }
 }
